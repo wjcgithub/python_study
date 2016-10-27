@@ -1,6 +1,35 @@
 # python_study
 
-## 输入输出
+## 常用数据成分
+- int
+- string
+- float
+- list
+`L = [1,2,3]`
+- tuple
+`T = (1,2,3,[4,5])`
+`tuple一旦初始化就不能修改`
+- dist
+`d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}`
+- set 
+`s = set(list(range(10)))`
+`s1 = set(['a','b','c'])`
+
+## 运算符成分
+- \+
+- \-
+- \*
+- /
+- //  下取整
+- %
+
+## 控制循环成分
+- if
+- while
+- for in
+
+
+## 输入输出成分
 ### 输入
 - scanf
 
@@ -27,34 +56,6 @@ s2=85
 s3=(s2/s1-1)*100
 print('%.1f%%' %(s3))
 ```
-
-## 常用数据类型
-- int
-- string
-- float
-- list
-`L = [1,2,3]`
-- tuple
-`T = (1,2,3,[4,5])`
-`tuple一旦初始化就不能修改`
-- dist
-`d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}`
-- set 
-`s = set(list(range(10)))`
-`s1 = set(['a','b','c'])`
-
-## 运算符
-- \+
-- \-
-- \*
-- /
-- //  下取整
-- %
-
-## 控制循环成分
-- if
-- while
-- for in
 
 ## 函数
 ### 函数参数
