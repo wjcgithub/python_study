@@ -127,3 +127,49 @@ print(L[1:2])  # 正向段落切
 print(L[-2:]) # 倒着切
 print(L[-1:])  # 切最后一个
 ```
+
+### 迭代
+- 字典dict的迭代
+```
+d = {'a': 1, 'b': 2, 'c': 3}
+for key in d:
+  print(key)
+```
+> 默认情况下，dict迭代的是key。如果要迭代value，可以用for value in d.values()，如果要同时迭代key和value，可以用for k, v in d.items()
+
+- 字符串迭代
+```
+for ch in 'ABC':
+    print(ch)
+```
+> 当我们使用for循环时，只要作用于一个可迭代对象，for循环就可以正常运行，而我们不太关心该对象究竟是list还是其他数据类型
+> 如何判断一个对象是可迭代对象呢？方法是通过collections模块的Iterable类型判断
+
+```
+from collections import Iterable
+isinstance('abc', Iterable) # str是否可迭代
+True
+isinstance([1,2,3], Iterable) # list是否可迭代
+True
+isinstance(123, Iterable) # 整数是否可迭代
+False
+```
+
+- list带下标的迭代
+```
+for i, value in enumerate(['A', 'B', 'C']):
+...     print(i, value)
+...
+0 A
+1 B
+2 C
+```
+
+```
+>>> for x, y in [(1, 1), (2, 4), (3, 9)]:
+...     print(x, y)
+...
+1 1
+2 4
+3 9
+```
