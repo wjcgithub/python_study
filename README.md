@@ -213,3 +213,28 @@ isinstance((x for x in range(10)), Iterator)
 ```
 > 生成器都是Iterator对象，但`list`,`dict`,`str`虽然是`Iterable`，却不是`Iterator`。
 > 把`list`,`dict`,`str`等`Iterable`变成`Iterator`可以使用`iter()`函数
+
+#高阶函数
+> 既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为`高阶函数`
+
+##map/reduce
+> 我们先看map。map()函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回。
+`list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9]))`
+> reduce把一个函数作用在一个序列[x1, x2, x3, ...]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算
+`reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)`
+
+##filter
+> 和map()类似，filter()也接收一个函数和一个序列。和map()不同的是，filter()把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素。
+```
+def is_odd(n):
+    return n % 2 == 1
+
+list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
+# 结果: [1, 5, 9, 15]
+```
+
+##sorted
+> sorted()函数也是一个高阶函数，它还可以接收一个key函数来实现自定义的排序，例如按绝对值大小排序
+> key指定的函数将作用于list的每一个元素上，并根据key函数返回的结果进行排序
+> 默认情况下，对字符串排序，是按照ASCII的大小比较的
+`sorted(L,key=func_name,reverse=True|False)`
