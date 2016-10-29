@@ -103,8 +103,8 @@ a = 1 b = 2 c = 3 d = 88 kw = {'x': '#'}
 Python的函数具有非常灵活的参数形态，既可以实现简单的调用，又可以传入非常复杂的参数。
 默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！
 要注意定义可变参数和关键字参数的语法：
-*args是可变参数，args接收的是一个tuple；
-**kw是关键字参数，kw接收的是一个dict。
+`*args`是`可变参数`，args接收的是一个`tuple`；
+`**kw`是`关键字参数`，kw接收的是一个`dict`。
 以及调用函数时如何传入可变参数和关键字参数的语法：
 可变参数既可以直接传入：func(1, 2, 3)，又可以先组装list或tuple，再通过*args传入：func(*(1, 2, 3))；
 关键字参数既可以直接传入：func(a=1, b=2)，又可以先组装dict，再通过**kw传入：func(**{'a': 1, 'b': 2})。
@@ -214,27 +214,95 @@ isinstance((x for x in range(10)), Iterator)
 > 生成器都是Iterator对象，但`list`,`dict`,`str`虽然是`Iterable`，却不是`Iterator`。
 > 把`list`,`dict`,`str`等`Iterable`变成`Iterator`可以使用`iter()`函数
 
-#高阶函数
+#函数式编程
+> 函数也是一个对象
+> 而且函数对象可以被赋值给变量，所以，通过变量也能调用函数
+
+##高阶函数
 > 既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为`高阶函数`
 
-##map/reduce
+###map/reduce
 > 我们先看map。map()函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回。
 `list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9]))`
 > reduce把一个函数作用在一个序列[x1, x2, x3, ...]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算
 `reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)`
 
-##filter
+###filter
 > 和map()类似，filter()也接收一个函数和一个序列。和map()不同的是，filter()把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素。
+
 ```
 def is_odd(n):
     return n % 2 == 1
 
 list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
-# 结果: [1, 5, 9, 15]
+[1, 5, 9, 15]
 ```
 
-##sorted
+###sorted
 > sorted()函数也是一个高阶函数，它还可以接收一个key函数来实现自定义的排序，例如按绝对值大小排序
 > key指定的函数将作用于list的每一个元素上，并根据key函数返回的结果进行排序
 > 默认情况下，对字符串排序，是按照ASCII的大小比较的
 `sorted(L,key=func_name,reverse=True|False)`
+
+##返回函数
+> 就是将函数的返回值由原来的返回基本数据类型改为返回函数，但是该函数不会立即执行
+
+### 注意闭包
+> 返回函数不要引用任何循环变量，或者后续会发生变化的变量
+```
+
+#closure
+def count():
+    fs=[]
+    for i in range(1,4):
+        def f():
+            return i*i
+        fs.append(f)
+    return fs
+
+f1,f2,f3=count()
+print(f1())
+print(f2())
+print(f3())
+
+
+def count():
+    def f(j):
+        def p():
+            return j*j
+        return p
+    fs=[]
+    for i in range(1,4):
+        fs.append(f(i))
+    return fs
+
+f1,f2,f3=count()
+print(f1())
+print(f2())
+print(f3())
+```
+
+##匿名函数
+> 关键字lambda表示匿名函数，冒号前面的x表示函数参数。
+> 匿名函数有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果。
+```
+lamada x,y:x*x+y*y
+```
+
+##装饰器
+`link:` http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014318435599930270c0381a3b44db991cd6d858064ac0000
+
+##偏函数
+> 偏函数（Partial function）
+> 当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。
+> 简单总结functools.partial的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单
+
+```
+import functools
+int2 = functools.partial(int, base=2)
+int2('1000000')
+int2('1010101')
+```
+
+
+#模块
