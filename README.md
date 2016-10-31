@@ -1,3 +1,6 @@
+# Python 资料与文档
+1. 内置函数：https://docs.python.org/3/library/functions.html
+
 # 常用数据成分
 - int
 - string
@@ -306,3 +309,8 @@ int2('1010101')
 
 
 #模块
+> python中的模块名就是文件名
+> 模块还可以有层级结构
+> 带目录的模块，内部必须有`__init__.py`文件，他代表的就是当前这个目录的模块，表示模块`dirname.filename(模块名称)`　｜　`dirname.dirname......filename(模块名)`
+> 如果有多层目录结构，那么每层目录里面都要有一个`__init__.py`文件
+> 自己创建模块时要注意命名，不能和Python自带的模块名称冲突。例如，系统自带了sys模块，自己的模块就不可命名为sys.py，否则将无法导入系统自带的sys模块。

@@ -34,5 +34,5 @@ print(L)
 
 #e8
 d={'a':1, 'b':2, 'c':3}
-# L=[k+str('=')+v for k,v in d.items()]
+# L=[k+'='+v for k,v in d.items()]
 print(L)
