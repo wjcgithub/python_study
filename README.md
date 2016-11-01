@@ -300,7 +300,7 @@ lamada x,y:x*x+y*y
 > 当函数的参数个数太多，需要简化时，使用functools.partial可以创建一个新的函数，这个新函数可以固定住原函数的部分参数，从而在调用时更简单。
 > 简单总结functools.partial的作用就是，把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单
 
-```
+```python
 import functools
 int2 = functools.partial(int, base=2)
 int2('1000000')
@@ -347,7 +347,7 @@ import sys
 
 ##获取对象信息
 
-```
+```python
 class Animal(object):
     name="金毛"
     
@@ -395,8 +395,8 @@ returnrun()
 
 > Python中oop的属性分为类属性和实例属性，一个实例可以在外部在声明多个实例属性
 > 实例属性不会覆盖类属性，这点需要注意
-```
 
+```python
 class Student(object):
     name='Student'
 
@@ -413,4 +413,5 @@ del s.name                 # 如果删除实例的name属性
 print(s.name)              # 再次调用s.name，由于实例的name属性没有找到，类的name属性就显示出来了
 
 ```
+
 > 在编写程序的时候，千万不要把实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。
