@@ -329,4 +329,88 @@ import sys
 1. 一是直接修改sys.path，添加要搜索的目录：  `sys.path.append('/Users/michael/my_py_scripts')` 这种方法是在运行时修改，运行结束后失效。
 2. 第二种方法是设置环境变量PYTHONPATH，该环境变量的内容会被自动添加到模块搜索路径中。设置方式与设置Path环境变量类似。注意只需要添加你自己的搜索路径，Python自己本身的搜索路径不受影响。
 
-# 面向对象编程
+# 面向对象编程 
+- 不同点和phpd的面向对象比较
+
+> 使用class声明变量
+> 继承　`class Student(Object)`
+> 调用属性和方法使用`.`, 不使用`->`
+> 构造函数为`__init__`
+> 函数的第一个参数默认为`self`    funcname(self(python固定),其他和普通函数一样的参数)
+
+## 访问权限
+1. 什么都不修饰就是公有的属性     name
+2. 变量前面添加__就是私有属性　　　__name
+3. 前后都添加__的是特殊变量,可以直接访问＝　　　　__name__
+4. 你会看到以一个下划线开头的实例变量名，比如_name，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当你看到这样的变量时，意思就是，“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”
+5. 
+
+##获取对象信息
+
+```
+class Animal(object):
+    name="金毛"
+    
+    def run(self):
+        print('Animal is running...')
+
+class Dog(Animal):
+    def run(self):
+        print('Dog is running')
+
+class Cat(Animal):
+    def run(self):
+        print('Cat is running')
+
+
+cat=Cat()
+dog=Dog()
+
+print(type(cat))
+print(type(dog))
+
+print(isinstance(cat,Cat))
+print(isinstance(cat,Animal))
+print(isinstance(cat,Dog))
+
+
+print(isinstance([1,2,3], (list,tuple)))
+print(isinstance((1,2,3), (list,tuple)))
+
+print(dir(dog))
+print(dir('ABC'))
+
+
+print(hasattr(dog,'name'))
+print(getattr(dog,'name'))
+setattr(dog,'name','比熊')
+print(getattr(dog,'name'))
+print(getattr(dog,'color', '黄色'))
+
+returnrun = getattr(dog, 'run')
+returnrun()
+```
+
+#实例属性和类属性
+
+> Python中oop的属性分为类属性和实例属性，一个实例可以在外部在声明多个实例属性
+> 实例属性不会覆盖类属性，这点需要注意
+```
+
+class Student(object):
+    name='Student'
+
+s=Student()
+print(s.name)             # 打印name属性，因为实例并没有name属性，所以会继续查找class的name属性
+print(Student.name)       # 打印类的name属性
+
+
+s.name="Lisi"
+print(s.name)              # 由于实例属性优先级比类属性高，因此，它会屏蔽掉类的name属性
+print(Student.name)        # 但是类属性并未消失，用Student.name仍然可以访问
+
+del s.name                 # 如果删除实例的name属性
+print(s.name)              # 再次调用s.name，由于实例的name属性没有找到，类的name属性就显示出来了
+
+```
+> 在编写程序的时候，千万不要把实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。
