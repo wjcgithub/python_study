@@ -131,7 +131,7 @@ print(L[-1:])  # 切最后一个
 
 ## 迭代
 - 字典dict的迭代
-```
+```python
 d = {'a': 1, 'b': 2, 'c': 3}
 for key in d:
   print(key)
@@ -139,14 +139,14 @@ for key in d:
 > 默认情况下，dict迭代的是key。如果要迭代value，可以用for value in d.values()，如果要同时迭代key和value，可以用for k, v in d.items()
 
 - 字符串迭代
-```
+```python
 for ch in 'ABC':
     print(ch)
 ```
 > 当我们使用for循环时，只要作用于一个可迭代对象，for循环就可以正常运行，而我们不太关心该对象究竟是list还是其他数据类型
 > 如何判断一个对象是可迭代对象呢？方法是通过collections模块的Iterable类型判断
 
-```
+```python
 from collections import Iterable
 isinstance('abc', Iterable) # str是否可迭代
 True
@@ -157,7 +157,7 @@ False
 ```
 
 - list带下标的迭代
-```
+```python
 for i, value in enumerate(['A', 'B', 'C']):
 ...     print(i, value)
 ...
@@ -166,18 +166,18 @@ for i, value in enumerate(['A', 'B', 'C']):
 2 C
 ```
 
-```
->>> for x, y in [(1, 1), (2, 4), (3, 9)]:
-...     print(x, y)
-...
-1 1
-2 4
-3 9
+```python
+for x, y in [(1, 1), (2, 4), (3, 9)]:
+    print(x, y)
+    
+#1 1
+#2 4
+#3 9
 ```
 
 ## 生成式与生成器
 - 生成式使用 `[]`
-```
+```python
 #e3
 L=[x*x for x in range(1,11)]
 print(L)
@@ -204,13 +204,15 @@ print(L)
 ```
 
 ### 生成式与生成器的区别
+
 - `生成式`占用内存大，一次性创建所有的数据到内存中
 - `生成器`占用的内存小，因为生成器存放到内存中的是算法本身，整的元素是取一次算一次的，所以比较剩内存
 
 ## 迭代器
+
 > 可以被next()函数调用并不断返回下一个值的对象称为迭代器：`Iterator`
 > 可以使用isinstance()判断一个对象是否是Iterator对象
-```
+```python
 from collections import Iterator
 isinstance((x for x in range(10)), Iterator)
 ```
@@ -218,22 +220,26 @@ isinstance((x for x in range(10)), Iterator)
 > 把`list`,`dict`,`str`等`Iterable`变成`Iterator`可以使用`iter()`函数
 
 #函数式编程
+
 > 函数也是一个对象
 > 而且函数对象可以被赋值给变量，所以，通过变量也能调用函数
 
 ##高阶函数
+
 > 既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为`高阶函数`
 
 ###map/reduce
+
 > 我们先看map。map()函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回。
 `list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9]))`
 > reduce把一个函数作用在一个序列[x1, x2, x3, ...]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算
 `reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)`
 
 ###filter
+
 > 和map()类似，filter()也接收一个函数和一个序列。和map()不同的是，filter()把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素。
 
-```
+```python
 def is_odd(n):
     return n % 2 == 1
 
@@ -252,8 +258,8 @@ list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
 
 ### 注意闭包
 > 返回函数不要引用任何循环变量，或者后续会发生变化的变量
-```
 
+```python
 #closure
 def count():
     fs=[]
@@ -288,7 +294,7 @@ print(f3())
 ##匿名函数
 > 关键字lambda表示匿名函数，冒号前面的x表示函数参数。
 > 匿名函数有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果。
-```
+```python
 lamada x,y:x*x+y*y
 ```
 
