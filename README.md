@@ -422,3 +422,49 @@ print(s.name)              # 再次调用s.name，由于实例的name属性没�
 > 在编写程序的时候，千万不要把实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。
 
 # 面向对象高级编程
+## slots
+> 规定python类只能具有某些属性，但是__slots__定义的属性仅仅对当前类实例起作用，对继承的子类是不起作用的
+> 除非在子类中也定义__slots__，这样子类实例允许定义的属性就是自身的__slots__加上父类的__slots__
+
+```python
+class Student(object):
+    __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+```
+
+## @property
+> 为了解决在类外随意修改类的属性而产生的一个语法糖，他通过实现一个属性的set,get方法类实现一个属性的能力，这样属性的赋值通过内部定义的方法就可以实现控制判断操作了
+> Python内置的@property装饰器就是负责把一个方法变成属性调用的
+
+```python
+class Student(object):
+
+    @property
+    def score(self):
+        return self._score
+
+    @score.setter
+    def score(self, value):
+        if not isinstance(value, int):
+            raise ValueError('score must be an integer!')
+        if value < 0 or value > 100:
+            raise ValueError('score must between 0 ~ 100!')
+        self._score = value
+```
+
+> birth是可读写属性，而age就是一个只读属性，因为age可以根据birth和当前时间计算出来。
+
+```python
+class Student(object):
+
+    @property
+    def birth(self):
+        return self._birth
+
+    @birth.setter
+    def birth(self, value):
+        self._birth = value
+
+    @property
+    def age(self):
+        return 2015 - self._birth
+```
