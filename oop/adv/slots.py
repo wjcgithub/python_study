@@ -2,68 +2,36 @@
 # -*- coding:utf-8 -*-
 __author__ = 'Wangjichao'
 
-from types import MethodType
-
 class Student(object):
-    pass
+    __slots__=('name','age')  #用tuple定义允许绑定的属性名称
 
 s=Student()
-s.name='lisi'
+s.name='list'
+s.age=19
+
 print(s.name)
-
-def setAge(self, age):
-    self.age=age
-
-s.setAge=MethodType(setAge,s)
-s.setAge(25)
 print(s.age)
 
-class Student(object):
-
-    @property
-    def score(self):
-        return self._score
-
-    @score.setter
-    def score(self, value):
-        if not isinstance(value, int):
-            raise ValueError('score must be an integer!')
-        if value < 0 or value > 100:
-            raise ValueError('score must between 0 ~ 100!')
-        self._score = value
-
-s = Student()
-s.score=10
-print(s.score)
+# s.sex=1  #  这个将会报错，没有属性sex
 
 
-class Screen(object):
-    resolution=111
+# 使用__slots__要注意，__slots__定义的属性仅对当前类实例起作用，对继承的子类是不起作用的
+class GraduateStudent(Student):
+    pass
 
-    @property
-    def width(self):
-        return self._width
+gs=GraduateStudent()
+gs.score=900
+print(gs.score)
 
-    @width.setter
-    def width(self, value):
-        self._width=value
+# 除非在子类中也定义__slots__，这样，子类实例允许定义的属性就是自身的__slots__加上父类的__slots__
+class GStudent(Student):
+    __slots__=('score')
 
-    @property
-    def height(self):
-        return self._height
-
-    @height.setter
-    def height(self, value):
-        self._height=value
-
-    @property
-    def resolution(self):
-        return self._resolution
-
-s=Screen()
-s.width=100
-s.height=100
-print(s.width)
-print(s.height)
-# s.resolution='fds'
-print(s.resolution)
+gs=GStudent()
+gs.name='zs'
+gs.age=20
+gs.score=90
+# gs.addr='bj'   报告属性未定义
+print(gs.name)
+print(gs.age)
+print(gs.score)
