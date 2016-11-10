@@ -7,7 +7,7 @@ __author__ = 'Wangjichao'
 #__iter__  __next__              使用类来做迭代
 #__getitem__                     获取指定项
 #__getattr__                     访问不存在的属性时候调用
-
+#__call__                        对实例进行直接调用就好比对一个函数进行调用一样
 
 #__iter__, __next__
 class Fib(object):
@@ -99,3 +99,18 @@ class Chain(object):
 
 chain=Chain()
 print(chain.status.user.timeline.all.list.request())
+
+
+#__call__
+class C1(object):
+    def __init__(self, name):
+        self.name=name
+
+    def __call__(self, *args, **kwargs):
+        print('function name is %s' % self.name)
+
+c=C1('haha')
+c()
+
+print(callable(c))
+print(callable(chain))
