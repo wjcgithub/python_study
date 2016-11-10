@@ -294,7 +294,7 @@ print(f3())
 > 关键字lambda表示匿名函数，冒号前面的x表示函数参数。
 > 匿名函数有个限制，就是只能有一个表达式，不用写return，返回值就是该表达式的结果。
 ```python
-lamada x,y:x*x+y*y
+lamada: x,y:x*x+y*y
 ```
 
 ##装饰器
@@ -472,4 +472,16 @@ class Student(object):
 
 ## 多重继承
 > python支持多重继承，（php支持单继承多接口，但是可用trait提供多重继承的功能）
-> 
+> MixIn的目的就是给一个类增加多个功能
+> python的多重继承是通过`,`分隔
+
+```python
+class A(B,C,D,EMixIn)
+```
+
+## Python定制类（类似php中的魔术方法）
+__str__
+__repr__
+__iter__
+__getitem__
+__getattr__
