@@ -493,3 +493,28 @@ class A(B,C,D,EMixIn)
 
 # 枚举类
 > Enum可以把一组相关常量定义在一个class中，且class不可变，而且成员可以直接比较
+
+# I/O
+> python的i/o和c的用法是兼容的
+
+## I/O函数
+open
+close
+readline
+readlines 返回list集合
+
+## 读取参数
+open(filename,类型(r|rb),encoding=(gbk|utf-8),errors='ignore'))
+
+## 内置关闭文件句柄描述付
+```
+with open('a.txt','r') as f:
+    print(f.read())
+```
+
+## StringIO, BytesIO
+> StringIO和BytesIO是在内存中操作str和bytes的方法，使得和读写文件具有一致的接口。
+read
+readline
+write
+getvalue
