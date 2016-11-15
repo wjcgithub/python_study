@@ -10,7 +10,7 @@
 - tuple
 `T = (1,2,3,[4,5])`
 `tuple一旦初始化就不能修改`
-- dist
+- dict
 `d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}`
 - set 
 `s = set(list(range(10)))`
@@ -518,3 +518,9 @@ read
 readline
 write
 getvalue
+
+## 序列化pickling，反序列化unpickling
+> 依赖的模块pickle
+> pickle.dumps(dict)  序列化为二进制
+> pickle.dump()       直接把对象序列化后写入一个file-like Object
+> pickle.load(bytes)  从一个file-like Object中直接反序列化
