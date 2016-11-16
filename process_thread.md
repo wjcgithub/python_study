@@ -91,6 +91,12 @@ localObj.name = 'lisi'
 localObj.age = 18'
 ```
 
+
+# 分布式进程
+- 通过multiprocessing的子模块managers将队列暴露到网络上, 这样生产者可以在一台机器跑,消费者可以在另一台机器上跑
+
+
+
 # 总结
 - 在Unix/Linux下，可以使用fork()调用实现多进程。
 - 要实现跨平台的多进程，可以使用multiprocessing模块。
