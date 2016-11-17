@@ -8,6 +8,22 @@
 > Python所有的错误都是从BaseException类派生的，常见的错误类型和继承关系看这里：
 https://docs.python.org/3/library/exceptions.html#exception-hierarchy
 
+```python
+try:
+    print('try...')
+    r = 10 / int('2')
+    print('result:', r)
+except ValueError as e:
+    print('ValueError:', e)
+except ZeroDivisionError as e:
+    print('ZeroDivisionError:', e)
+else:
+    print('no error!')
+finally:
+    print('finally...')
+print('END')
+```
+
 ## 自定义错误
 > 选择好继承关系后定义自己的错误类
 > 手动抛出错误　`raise ErrorClass('error info')`
