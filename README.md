@@ -197,9 +197,27 @@ print(L)
 L=[d for d in os.listdir('.')]
 print(L)
 ```
+
 - 生成器使用 `()
+
+### 生成器的第一种实现　`()`
+- 第一种生成器的实现就是将生成式的`[]`改为`()`
+
+```python
+g = (x * x for x in range(10))
 ```
 
+### 生成器的第二种实现　`yield关键字`
+- 第二种生成器的方式就是在函数中使用`yield`关键字
+
+```python
+def fib(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        yield b
+        a, b = b, a + b
+        n = n + 1
+    return 'done'
 ```
 
 ### 生成式与生成器的区别

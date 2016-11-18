@@ -2,6 +2,10 @@
 # -*- coding:utf-8 -*-
 import os
 
+L=[1,2,3,4,5,6,7]
+print([0]+L[:])
+exit()
+
 #e1
 L = list(range(1,11))
 print(L)
@@ -36,3 +40,7 @@ print(L)
 d={'a':1, 'b':2, 'c':3}
 # L=[k+'='+v for k,v in d.items()]
 print(L)
+
+l=[]
+[ l.append(x*x) for x in range(1, 11) if x % 2 == 0]
+print(l)
