@@ -542,3 +542,6 @@ getvalue
 > pickle.dumps(dict)  序列化为二进制
 > pickle.dump()       直接把对象序列化后写入一个file-like Object
 > pickle.load(bytes)  从一个file-like Object中直接反序列化
+
+# 爬虫
+https://jecvay.com/category/smtech/python3-webbug
